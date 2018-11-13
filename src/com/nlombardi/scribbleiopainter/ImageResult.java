@@ -1,6 +1,16 @@
 package com.nlombardi.scribbleiopainter;
 
+import com.sun.javafx.fxml.builder.URLBuilder;
+import com.sun.javafx.iio.ImageStorage;
 import org.json.JSONObject;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.Buffer;
 
 public class ImageResult {
     private String title;
@@ -55,6 +65,25 @@ public class ImageResult {
 
     public String getThumbLink() {
         return thumbLink;
+    }
+
+    public BufferedImage getResizedImage(){
+        int resizedWidth = 116;
+        int resizedHeight = (int) Math.min((116.0f/getWidth()) * height, 90);
+        BufferedImage resized = null;
+        try {
+            BufferedImage image = ImageIO.read(new URL(getLink()));
+            resized = new BufferedImage(resizedWidth, resizedHeight, BufferedImage.TYPE_INT_ARGB);
+            final Graphics2D g = resized.createGraphics();
+            g.drawImage(image, 0, 0, resizedWidth, resizedHeight, null);
+            g.dispose();
+            return resized;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return resized;
     }
 
     @Override
