@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImageRetriever {
-    public static ImageRetriever instance;
-
-    private static final String cx = "004830798009892852221:yb8c_a89hlu";
-    private static final String apiKey = "AIzaSyBBao5bsFTvvHkrQlEH6jkEFYI1RYQup3I";
+    private static Config config;
+    private static ImageRetriever instance;
 
     protected ImageRetriever() {
 
@@ -24,6 +22,7 @@ public class ImageRetriever {
         if (instance == null) {
             instance = new ImageRetriever();
         }
+        config = new Config();
         return instance;
     }
 
@@ -34,10 +33,10 @@ public class ImageRetriever {
      */
     public void getImages(String query, ImageRetrievedResponse callback) {
         Unirest.get("https://www.googleapis.com/customsearch/v1")
-                .queryString("key", apiKey)
-                .queryString("cx", cx)
+                .queryString("key", config.getStringProperty("apiKey"))
+                .queryString("cx", config.getStringProperty("cx"))
                 .queryString("q", query)
-                .queryString("num", 3)
+                .queryString("num", 9)
                 .queryString("imgSize", "medium")
                 .queryString("searchType", "image")
 
