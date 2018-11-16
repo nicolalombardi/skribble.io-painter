@@ -32,13 +32,13 @@ public class Drawing {
 
     @Override
     public String toString() {
-        String s = "";
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                s += getPixel(i, j).toString() + ", ";
+                stringBuilder.append(getPixel(i, j).toString()).append(", ");
             }
-            s += "\n";
+            stringBuilder.append("\n");
         }
-        return s;
+        return stringBuilder.toString();
     }
 }
