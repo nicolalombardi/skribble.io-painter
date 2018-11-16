@@ -10,15 +10,15 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageRetriever {
+class ImageRetriever {
     private static Config config;
     private static ImageRetriever instance;
 
-    protected ImageRetriever() {
+    private ImageRetriever() {
 
     }
 
-    public static ImageRetriever getInstance() {
+    static ImageRetriever getInstance() {
         if (instance == null) {
             instance = new ImageRetriever();
         }
@@ -31,7 +31,7 @@ public class ImageRetriever {
      *
      * @param query The search query
      */
-    public void getImages(String query, ImageRetrievedResponse callback) {
+    void getImages(String query, ImageRetrievedResponse callback) {
         Unirest.get("https://www.googleapis.com/customsearch/v1")
                 .queryString("key", config.getStringProperty("apiKey"))
                 .queryString("cx", config.getStringProperty("cx"))
@@ -40,7 +40,7 @@ public class ImageRetriever {
                 .queryString("imgSize", "medium")
                 .queryString("searchType", "image")
 
-                .asJsonAsync(new Callback<JsonNode>() {
+                .asJsonAsync(new Callback<>() {
                     @Override
                     public void completed(HttpResponse<JsonNode> httpResponse) {
                         List<ImageResult> imageResults = new ArrayList<>();

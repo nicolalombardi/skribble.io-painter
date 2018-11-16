@@ -18,7 +18,7 @@ public class ImageResult {
     private int thumbWidth, thumbHeight;
     private String thumbLink;
 
-    public ImageResult(JSONObject obj) {
+    ImageResult(JSONObject obj) {
         JSONObject image = obj.getJSONObject("image");
 
         this.title = obj.getString("title");
@@ -39,7 +39,7 @@ public class ImageResult {
         return byteSize;
     }
 
-    public int getWidth() {
+    private int getWidth() {
         return width;
     }
 
@@ -47,7 +47,7 @@ public class ImageResult {
         return height;
     }
 
-    public String getLink() {
+    private String getLink() {
         return link;
     }
 
@@ -63,7 +63,7 @@ public class ImageResult {
         return thumbLink;
     }
 
-    public BufferedImage getResizedImage() {
+    BufferedImage getResizedImage() {
         int resizedWidth = 116;
         int resizedHeight = (int) Math.min((116.0f / getWidth()) * height, 90);
         BufferedImage resized = null;
@@ -79,7 +79,7 @@ public class ImageResult {
 
         } catch (IOException e) {
             System.err.println("Could't get the image, link: " + getLink());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

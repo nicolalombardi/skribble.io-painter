@@ -148,9 +148,7 @@ public class Main extends Application {
             previews[i].setFitHeight(90);
             previews[i].setFitWidth(116);
             previews[i].setPreserveRatio(true);
-            previews[i].setOnMouseClicked(event -> {
-                paintImage(index);
-            });
+            previews[i].setOnMouseClicked(event -> paintImage(index));
             GridPane.setConstraints(previews[i], i % 3, i / 3);
             images.getChildren().add(previews[i]);
         }
@@ -241,23 +239,23 @@ public class Main extends Application {
                 int pressDelay = conf.getIntProperty("mouse_press_ms");
                 int endDelay = conf.getIntProperty("mouse_end_ms");
 
-                for (int i = 0; i < ops.length; i++) {
-                    for (int j = 0; j < ops[i].size(); j++) {
-                        int colorX = ops[i].get(j).getColor().getPositionX();
-                        int colorY = ops[i].get(j).getColor().getPositionY();
+                for (ArrayList<Pixel> op : ops) {
+                    for (Pixel anOp : op) {
+                        int colorX = anOp.getColor().getPositionX();
+                        int colorY = anOp.getColor().getPositionY();
 
-                        if (ops[i].get(j).getColor().getID() != lastColorID) {
+                        if (anOp.getColor().getID() != lastColorID) {
                             bot.mouseMove(colorX, colorY);
                             bot.delay(moveDelay);
                             bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
                             bot.delay(pressDelay);
                             bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                             bot.delay(endDelay);
-                            lastColorID = ops[i].get(j).getColor().getID();
+                            lastColorID = anOp.getColor().getID();
                         }
 
 
-                        bot.mouseMove(canvasX + brushSize / 2 + brushSize * ops[i].get(j).getPositionX(), canvasY + brushSize / 2 + brushSize * ops[i].get(j).getPositionY());
+                        bot.mouseMove(canvasX + brushSize / 2 + brushSize * anOp.getPositionX(), canvasY + brushSize / 2 + brushSize * anOp.getPositionY());
                         bot.delay(moveDelay);
                         bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
                         bot.delay(pressDelay);

@@ -13,10 +13,6 @@ public class Palette {
         this(new ArrayList<>(), 0, 0, 0, 0);
     }
 
-    public Palette(ArrayList<PaletteColor> palette) {
-        this(palette, 0, 0, 0, 0);
-    }
-
     private Palette(ArrayList<PaletteColor> palette, int x, int y, int xStep, int yStep) {
         this.palette = palette;
         setParameters(x, y, xStep, yStep);

@@ -4,11 +4,7 @@ public class Pixel {
     private PaletteColor color;
     private int positionX, positionY;
 
-    public Pixel(PaletteColor color) {
-        this(color, 0, 0);
-    }
-
-    public Pixel(PaletteColor color, int x, int y) {
+    Pixel(PaletteColor color, int x, int y) {
         this.color = color;
         this.positionX = x;
         this.positionY = y;

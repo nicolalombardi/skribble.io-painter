@@ -5,11 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Config
-{
-    Properties configFile;
-    public Config()
-    {
+class Config {
+    private Properties configFile;
+
+    Config() {
         configFile = new java.util.Properties();
         try {
             configFile.load(new FileInputStream(new File("config.cfg")));
@@ -19,11 +18,11 @@ public class Config
         }
     }
 
-    public String getStringProperty(String key){
+    String getStringProperty(String key) {
         return this.configFile.getProperty(key);
     }
 
-    public int getIntProperty(String key){
+    int getIntProperty(String key) {
         return Integer.parseInt(this.configFile.getProperty(key));
     }
 }
