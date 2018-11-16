@@ -14,7 +14,8 @@ public class Config
         try {
             configFile.load(new FileInputStream(new File("config.cfg")));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Couldn't find 'config.cfg', create it and restart the app");
+            System.exit(0);
         }
     }
 
