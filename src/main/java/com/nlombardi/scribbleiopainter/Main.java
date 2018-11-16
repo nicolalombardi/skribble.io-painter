@@ -7,9 +7,10 @@ import com.nlombardi.scribbleiopainter.skribbl.Pixel;
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -29,15 +30,10 @@ import java.util.TimerTask;
 public class Main extends Application {
     private static Config conf;
     private static Palette palette;
-
-
+    private static int canvasX, canvasY, brushSize;
     private ImageRetriever imageRetriever = ImageRetriever.getInstance();
     private ImageView previews[];
     private ArrayList<Drawing> lastDrawings;
-
-    private static int canvasX, canvasY, brushSize;
-
-
     private Label status;
 
 
@@ -116,8 +112,16 @@ public class Main extends Application {
         queryField.setPrefColumnCount(15);
 
 
-        status = new Label("Not ready");
+        Button searchButton = new Button("Search");
 
+        Separator separator1 = new Separator();
+        separator1.setOrientation(Orientation.VERTICAL);
+
+        Separator separator2 = new Separator();
+        separator2.setOrientation(Orientation.VERTICAL);
+
+
+        status = new Label("Not ready");
 
         CheckBox cartoonChk = new CheckBox();
         cartoonChk.setText("Cartoon suffix");
@@ -125,15 +129,16 @@ public class Main extends Application {
         sketchChk.setText("Sketch suffix");
 
 
-        Button searchButton = new Button("Search");
         GridPane.setConstraints(queryField, 0, 0);
         GridPane.setConstraints(searchButton, 1, 0);
-        GridPane.setConstraints(status, 2, 0);
-        GridPane.setConstraints(cartoonChk, 3, 0);
-        GridPane.setConstraints(sketchChk, 4, 0);
+        GridPane.setConstraints(separator1, 2, 0);
+        GridPane.setConstraints(status, 3, 0);
+        GridPane.setConstraints(separator2, 4, 0);
+        GridPane.setConstraints(cartoonChk, 5, 0);
+        GridPane.setConstraints(sketchChk, 6, 0);
 
 
-        inputGrid.getChildren().addAll(queryField, searchButton, status, cartoonChk, sketchChk);
+        inputGrid.getChildren().addAll(queryField, searchButton, separator1, status, separator2, cartoonChk, sketchChk);
 
         previews = new ImageView[9];
 
@@ -163,7 +168,7 @@ public class Main extends Application {
         rootLayout.getChildren().addAll(inputGrid, images);
 
         primaryStage.setTitle("Scribble.io Painter");
-        primaryStage.setScene(new Scene(rootLayout, 520, 540));
+        primaryStage.setScene(new Scene(rootLayout, 600, 600));
         primaryStage.show();
 
     }
@@ -234,6 +239,7 @@ public class Main extends Application {
 
                 int moveDelay = conf.getIntProperty("mouse_move_ms");
                 int pressDelay = conf.getIntProperty("mouse_press_ms");
+                int endDelay = conf.getIntProperty("mouse_end_ms");
 
                 for (int i = 0; i < ops.length; i++) {
                     for (int j = 0; j < ops[i].size(); j++) {
@@ -246,17 +252,17 @@ public class Main extends Application {
                             bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
                             bot.delay(pressDelay);
                             bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-                            bot.delay(pressDelay);
+                            bot.delay(endDelay);
                             lastColorID = ops[i].get(j).getColor().getID();
                         }
 
 
                         bot.mouseMove(canvasX + brushSize / 2 + brushSize * ops[i].get(j).getPositionX(), canvasY + brushSize / 2 + brushSize * ops[i].get(j).getPositionY());
-                        //bot.delay(moveDelay);
+                        bot.delay(moveDelay);
                         bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-                        //bot.delay(pressDelay);
-                        bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
                         bot.delay(pressDelay);
+                        bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                        bot.delay(endDelay);
 
                     }
                 }

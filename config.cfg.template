@@ -5,6 +5,7 @@ resolution =
 
 mouse_move_ms =
 mouse_press_ms =
+mouse_end_ms =
 
 768_canvasX =
 768_canvasY =
