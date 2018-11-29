@@ -39,8 +39,7 @@ class ImageRetriever {
                 .queryString("num", 9)
                 .queryString("imgSize", "medium")
                 .queryString("searchType", "image")
-
-                .asJsonAsync(new Callback<>() {
+                .asJsonAsync(new Callback<JsonNode>() {
                     @Override
                     public void completed(HttpResponse<JsonNode> httpResponse) {
                         List<ImageResult> imageResults = new ArrayList<>();
