@@ -1,24 +1,24 @@
 apiKey =
 cx =
 
-resolution =
+resolution = 1080
 
-mouse_move_ms =
-mouse_press_ms =
-mouse_end_ms =
+mouse_move_ms = 0
+mouse_press_ms = 2
+mouse_end_ms = 0
 
-768_canvasX =
-768_canvasY =
-768_paletteX =
-768_paletteY =
-768_brushSize =
-768_paletteXStep =
-768_paletteYStep =
+768_canvasX = 225
+768_canvasY = 132
+768_paletteX = 293
+768_paletteY = 717
+768_brushSize = 3
+768_paletteXStep = 24
+768_paletteYStep = 21
 
-1080_canvasX =
-1080_canvasY =
-1080_paletteX =
-1080_paletteY =
-1080_brushSize =
-1080_paletteXStep =
-1080_paletteYStep =
+1080_canvasX = 483
+1080_canvasY = 218
+1080_paletteX = 574
+1080_paletteY = 837
+1080_brushSize = 3
+1080_paletteXStep = 24
+1080_paletteYStep = 21
