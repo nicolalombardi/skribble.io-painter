@@ -4,7 +4,7 @@ This is a small program written in Java that allows you to paint perfect picture
 This project can be easily imported into IDEs as a maven project
 
 ## Dependencies
-The only external dependency for this project is Unirest. You can learn more and get instructions to install it [here](http://unirest.io/java.html)
+The only external dependency for this project is Unirest. The Maven repository is [here](https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java/1.4.9)
 ## Configuration
 The configuration is managed by the file "config.cfg".</br>A template file is provided to simplify the configuration process.
 
